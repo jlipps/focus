@@ -9,6 +9,10 @@
 
 <template name="yourTeams">
   <h1>Your Teams</h1>
-  {{teams}}
+  {{#each teams}}
+  <div>{{name}} -
+    <a href="javascript:void(0);" class="deleteTeam">Delete</a>
+  </div>
+  {{/each}}
   <input type="button" value="Create Team" />
 </template>
