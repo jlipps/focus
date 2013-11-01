@@ -31,3 +31,11 @@ Helpers.showError = function(msg, timeout) {
 Helpers.showSuccess = function(msg, timeout) {
   showMessage('success', msg, timeout);
 };
+
+Helpers.handleEnter = function(e, fn) {
+  if (e.charCode === 13) {
+    e.stopPropagation();
+    fn();
+    return false;
+  }
+};
