@@ -6,8 +6,9 @@
   </h1>
   {{#each teams}}
     <div class="row-fluid">
-      <div class="span12">{{name}} -
-        <a href="javascript:void(0);" class="deleteTeam">Delete</a>
+      <div class="span12 team">
+        <a href="#">{{name}}</a>
+        <button type="button" class="close deleteTeam" aria-hidden="true">&times;</button>
       </div>
     </div>
   {{else}}
