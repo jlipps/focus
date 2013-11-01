@@ -1,4 +1,4 @@
-/*global Template:true, Meteor:true, Teams:true, window:true, $:true */
+/*global Template:true, Meteor:true, Teams:true, $:true, Helpers:true */
 "use strict";
 
 var userId = Meteor.userId();
@@ -9,15 +9,31 @@ Template.yourTeams.teams = function() {
     .fetch();
 };
 
-Template.yourTeams.events({
-  'click #createTeam': function () {
-    $('#modalCont').html(Meteor.render(function() {
-      return Template.createTeam();
-    }));
-  },
-  'click .deleteTeam': function() {
-    Teams.remove(this._id, function(err) {
-      if (err) console.log(err);
+var events = {};
+
+events['click #createTeam'] = function() {
+  $('#modalCont').html(Meteor.render(function() {
+    return Template.createTeam();
+  }));
+};
+
+events['click .deleteTeam'] = function() {
+  var team = this;
+  $('#modalCont').html(Meteor.render(function() {
+    var onConfirmation = function() {
+      Teams.remove(team._id, function(err) {
+        if (err) {
+          Helpers.showError("Could not delete " + team.name, 4000);
+        } else {
+          Helpers.showSuccess("Deleted " + team.name, 3000);
+        }
+      });
+    };
+    return Template.confirm({
+      confirmation: "If you delete this team, it will be gone permanently",
+      onConfirmation: onConfirmation
     });
-  }
-});
+  }));
+};
+
+Template.yourTeams.events(events);
