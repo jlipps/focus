@@ -1,10 +1,18 @@
 <template name="yourTeams">
-  <h1>Your Teams</h1>
+  <h1>
+    Your Teams
+    <input type="button" value="Add a Team" id="createTeam" />
+    <input type="button" value="Join a Team" id="joinTeam" />
+  </h1>
   {{#each teams}}
-  <div>{{name}} -
-    <a href="javascript:void(0);" class="deleteTeam">Delete</a>
-  </div>
+    <div class="row-fluid">
+      <div class="span12">{{name}} -
+        <a href="javascript:void(0);" class="deleteTeam">Delete</a>
+      </div>
+    </div>
+  {{else}}
+    <div class="row-fluid">
+      <div class="span12">You don't belong to any teams yet!</div>
+    </div>
   {{/each}}
-  <input type="button" value="Create Team" id="createTeam" />
-  <input type="button" value="Join Team" id="joinTeam" />
 </template>

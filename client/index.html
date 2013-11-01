@@ -1,9 +1,21 @@
 <head>
   <title>focus</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
-  {{loginButtons}}
-  {{> yourTeams}}
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container-fluid">
+        {{loginButtons}}
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid" id="mainCont">
+    {{> yourTeams}}
+    <hr />
+    <footer>Focus</footer>
+  </div>
+  <div id="modalCont"></div>
 </body>
 

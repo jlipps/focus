@@ -1,4 +1,4 @@
-/*global Template:true, Meteor:true, Teams:true, window:true*/
+/*global Template:true, Meteor:true, Teams:true, window:true, $:true */
 "use strict";
 
 var userId = Meteor.userId();
@@ -10,19 +10,10 @@ Template.yourTeams.teams = function() {
 };
 
 Template.yourTeams.events({
-  'click input': function () {
-    var teamName = window.prompt("What is your team called?");
-    var team = {
-      name: teamName,
-      owner: userId,
-      createdAt: Date.now()
-    };
-    Teams.insert(team, function(err) {
-      if (err) {
-        window.alert("Sorry, couldn't create a team with that name. " +
-                     "One already exists");
-      }
-    });
+  'click #createTeam': function () {
+    $('#modalCont').html(Meteor.render(function() {
+      return Template.createTeam();
+    }));
   },
   'click .deleteTeam': function() {
     Teams.remove(this._id, function(err) {
