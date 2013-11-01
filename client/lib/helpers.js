@@ -39,3 +39,12 @@ Helpers.handleEnter = function(e, fn) {
     return false;
   }
 };
+
+Helpers.confirm = function(message, onConfirm) {
+  $('#modalCont').html(Meteor.render(function() {
+    return Template.confirm({
+      confirmation: message,
+      onConfirmation: onConfirm
+    });
+  }));
+};
