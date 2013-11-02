@@ -10,3 +10,5 @@ accounts-ui
 accounts-github
 bootstrap
 router
+accounts-base
+accounts-password
