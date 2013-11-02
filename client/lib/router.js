@@ -25,7 +25,9 @@ Meteor.Router.filter('checkViewTeam', {only: ['showTeam']});
 
 Meteor.Router.add({
   '/': 'yourTeams',
+  '/teams': 'yourTeams',
   '/teams/:id': function(teamId) {
+    console.log("setting team id");
     Session.set('teamId', teamId);
     return 'showTeam';
   }
