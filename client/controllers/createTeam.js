@@ -3,12 +3,7 @@
 
 var submitCreation = function (evt, tpt) {
   var team = {
-    name: $('#createTeamField').val(),
-    owner: Meteor.userId(),
-    createdAt: Date.now(),
-    members: [],
-    goals: [],
-    invitationCodes: []
+    name: $('#createTeamField').val()
   };
   Teams.insert(team, function(err) {
     $(tpt.find('.modal')).modal('hide');

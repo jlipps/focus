@@ -1,0 +1,21 @@
+<template name="inviteMembers">
+  <form class="modal fade small" id="inviteMembersForm">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h3>Invite Team Members</h3>
+    </div>
+    <div class="modal-body">
+      <div class="alert alert-error hide" id="inviteErrors">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <span class="message"></span>
+      </div>
+      <textarea id="inviteEmails"></textarea>
+      <p>Enter a comma-separated list of e-mails</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#" class="btn" data-dismiss="modal">Close</a>
+      <a href="#" class="btn btn-primary" id="inviteBtn" onclick="$(this).submit();">Invite</a>
+    </div>
+  </form>
+</template>
+

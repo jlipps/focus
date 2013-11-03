@@ -1,4 +1,4 @@
-/*global Meteor:true, Accounts:true */
+/*global Meteor:true, Accounts:true, Session:true */
 "use strict";
 
 Accounts.ui.config({
@@ -9,3 +9,4 @@ Accounts.ui.config({
 });
 
 Meteor.subscribe("teams");
+Meteor.subscribe("invitations", {_id: Session.get("invitationId")});

@@ -13,3 +13,5 @@ router
 accounts-base
 accounts-password
 less
+collection-hooks
+underscore

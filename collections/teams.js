@@ -11,3 +11,11 @@ Teams.allow({
   }
 });
 
+Teams.before.insert(function(userId, team) {
+  team.createdAt = Date.now();
+  team.owner = userId;
+  team.members = [];
+  team.goals = [];
+});
+
+

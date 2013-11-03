@@ -5,12 +5,16 @@ body {
 }
 
 .modal {
-  .small {
-    width: 300px;
+  &.small {
+    width: 320px;
     margin-left: -150px;
 
-    input[type=text] {
+    input[type=text], textarea {
       width: 94%;
+    }
+
+    textarea {
+      height: 100px;
     }
   }
 }
