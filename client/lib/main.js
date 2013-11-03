@@ -8,5 +8,5 @@ Accounts.ui.config({
   passwordSignupFields: 'USERNAME_AND_EMAIL'
 });
 
-Meteor.subscribe("teams");
-Meteor.subscribe("invitations", {_id: Session.get("invitationId")});
+Meteor.subscribe("teams", Session.get("invitationId"));
+Meteor.subscribe("invitations", Session.get("invitationId"));

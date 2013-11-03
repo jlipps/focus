@@ -9,6 +9,8 @@
         <input type="button" value="Invite" id="inviteMembers" />
       </h2>
       {{#each team.members}}
+      {{else}}
+        <p>No team members yet. Invite some!</p>
       {{/each}}
     </div>
     <div class="span6">
@@ -17,6 +19,8 @@
         <input type="button" value="Add" id="addGoal" />
       </h2>
       {{#each team.goals}}
+      {{else}}
+        <p>No goals yet. Add some!</p>
       {{/each}}
     </div>
   </div>

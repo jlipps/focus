@@ -9,7 +9,6 @@ Template.showTeam.team = function() {
 var events = {};
 
 events['click #inviteMembers'] = function() {
-  console.log('clicked');
   $('#modalCont').html(Meteor.render(function() {
     return Template.inviteMembers();
   }));

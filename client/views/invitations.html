@@ -1,0 +1,7 @@
+<template name="invitations">
+  {{#if invitation}}
+    <h1>Adding you to the {{invitation.name}} team...</h1>
+  {{else}}
+    {{> signin}}
+  {{/if}}
+</template>

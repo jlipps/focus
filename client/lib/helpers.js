@@ -9,7 +9,8 @@ Helpers.onModalRendered = function() {
 };
 
 var showMessage = function(type, msg, timeout) {
-  $('#mainCont').prepend(Meteor.render(function() {
+  console.log("showing message");
+  $('#messageCont').prepend(Meteor.render(function() {
     return Template.message({type: type, message: msg});
   }));
   var msgDiv = $('#pageAlert');

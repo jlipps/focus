@@ -16,11 +16,14 @@
       </div>
     </div>
   </div>
-  <div class="container-fluid" id="mainCont">
-    {{renderPage}}
-    <hr />
-    <footer>&copy; 2013 Focus</footer>
+  <div id="mainCont">
+    <div class="container-fluid" id="messageCont"></div>
+    <div class="container-fluid">
+      {{#isolate}}{{renderPage}}{{/isolate}}
+      <hr />
+      <footer>&copy; 2013 Focus</footer>
+    </div>
+    <div id="modalCont"></div>
   </div>
-  <div id="modalCont"></div>
 </body>
 

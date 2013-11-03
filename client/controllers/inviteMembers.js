@@ -1,8 +1,32 @@
 /*global Template:true, Meteor:true, Teams:true, $:true, Helpers:true,
-  Session:true, Invitations:true */
+  Session:true, Invitations:true, _:true */
 "use strict";
 
 var inviteEvents = {};
+
+var sendInvitations = function(invitations, cb) {
+  var n = 0;
+  var errList = [];
+  var next = function(err, invitation) {
+    n++;
+    if (err) {
+      errList.push(invitation.email + ": could not send invitation, " +
+                   "maybe one's already been sent?");
+    }
+    if (n == invitations.length) {
+      cb(null, errList);
+    }
+  };
+  if (invitations.length) {
+    _.each(invitations, function(invitation) {
+      Invitations.insert(invitation, function(err) {
+        next(err, invitation);
+      });
+    });
+  } else {
+    next(null);
+  }
+};
 
 inviteEvents['submit #inviteMembersForm'] = function (evt, tpt) {
   evt.preventDefault();
@@ -23,21 +47,20 @@ inviteEvents['submit #inviteMembersForm'] = function (evt, tpt) {
     });
   }
 
-  Meteor.call("sendInvitations", invitations, function(err, res) {
-    $(tpt.find('.modal')).modal('hide');
+  sendInvitations(invitations, function(err, errorList) {
     if (err) {
       console.log(err);
       Helpers.showError("Sorry, we ran into problems sending the invitations", 4000);
     } else {
-      if (res.length) {
-        var messages = res.pluck('message');
+      if (errorList.length) {
         Helpers.showError("Some invitations could not be sent: <br/>" +
-                          messages.join("<br/>"));
+                          errorList.join("<br/>"));
       } else {
         Helpers.showSuccess("Invitations sent!", 3000);
       }
     }
   });
+  $(tpt.find('.modal')).modal('hide');
   return false;
 };
 
