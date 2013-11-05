@@ -8,7 +8,9 @@
         Members
         <input type="button" value="Invite" id="inviteMembers" />
       </h2>
-      {{#each team.members}}
+      {{#each members}}
+        {{username}}
+        <p>{{#if name}}{{name}}{{else}}{{username}}{{/if}}</p>
       {{else}}
         <p>No team members yet. Invite some!</p>
       {{/each}}

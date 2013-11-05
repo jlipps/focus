@@ -3,7 +3,16 @@
 "use strict";
 
 Template.showTeam.team = function() {
-  return Teams.findOne({_id: Session.get('teamId')});
+  var team = Teams.findOne({_id: Session.get('teamId')});
+  console.log(team.members);
+  return team;
+};
+
+Template.showTeam.members = function() {
+  var team = Template.showTeam.team();
+  if (team) {
+    return Meteor.users.find({_id: {$in: team.members}}).fetch();
+  }
 };
 
 var events = {};

@@ -2,16 +2,27 @@
 "use strict";
 
 Meteor.publish("teams", function(invitationId) {
-  var teams = [];
-  var invitedTeam = Invitations.findOne({_id: invitationId});
-  if (invitedTeams) {
-    teams.push(
-  var myTeams = Teams.find({$or: [{owner: this.userId},
-                                  {members: {$all: [this.userId]}}
-                                 ]},
-                           {sort: {createdAt: -1}});
+  var teams, invitationTeamId = -1;
+  var invitation = Invitations.findOne({_id: invitationId});
+  if (invitation) {
+    invitationTeamId = invitation.team;
+  }
+  teams = Teams.find({$or: [{owner: this.userId},
+                            {members: {$all: [this.userId]}},
+                            {_id: invitationTeamId}
+                           ]},
+                     {sort: {createdAt: -1}});
+  return teams;
 });
 
 Meteor.publish("invitations", function(invitationId) {
   return Invitations.find({_id: invitationId});
+});
+
+Meteor.publish("users", function(teamId) {
+  var team = Teams.findOne({_id: teamId});
+  if (team) {
+    return Meteor.users.find({_id: {$in: team.members}});
+  }
+  return [];
 });

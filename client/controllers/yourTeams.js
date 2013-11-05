@@ -5,7 +5,8 @@ var userId = Meteor.userId();
 
 Template.yourTeams.teams = function() {
   return Teams
-    .find({$or: [{owner: userId}, {member: userId}]})
+    .find({$or: [{owner: userId}, {members: {$all: [userId]}}]},
+          {sort: {name: 1}})
     .fetch();
 };
 
