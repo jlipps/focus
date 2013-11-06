@@ -42,6 +42,9 @@ Template.invitations.rendered = function() {
       }
       Meteor.Router.to('/teams/' + team._id);
       Helpers.showSuccess("Awesome! You're now a part of " + team.name);
+      Invitations.update(invite._id, {used: true}, function(err) {
+        if (err) console.log("problem setting invitation to used");
+      });
     });
   } else {
     console.log("no invite");

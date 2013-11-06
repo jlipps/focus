@@ -1,4 +1,4 @@
-/*global Meteor:true, Teams:true, Invitations:true */
+/*global Meteor:true, Teams:true, Invitations:true, Goals:true */
 "use strict";
 
 Meteor.publish("teams", function(invitationId) {
@@ -23,6 +23,14 @@ Meteor.publish("users", function(teamId) {
   var team = Teams.findOne({_id: teamId});
   if (team) {
     return Meteor.users.find({_id: {$in: team.members}});
+  }
+  return [];
+});
+
+Meteor.publish("goals", function(teamId) {
+  var team = Teams.findOne({_id: teamId});
+  if (team) {
+    return Goals.find({_id: {$in: team.goals}});
   }
   return [];
 });

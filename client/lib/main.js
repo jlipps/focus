@@ -12,4 +12,5 @@ Deps.autorun(function() {
   Meteor.subscribe("teams", Session.get("invitationId"));
   Meteor.subscribe("invitations", Session.get("invitationId"));
   Meteor.subscribe("users", Session.get("teamId"));
+  Meteor.subscribe("goals", Session.get("teamId"));
 });

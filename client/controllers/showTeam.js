@@ -4,14 +4,15 @@
 
 Template.showTeam.team = function() {
   var team = Teams.findOne({_id: Session.get('teamId')});
-  console.log(team.members);
   return team;
 };
 
 Template.showTeam.members = function() {
   var team = Template.showTeam.team();
   if (team) {
-    return Meteor.users.find({_id: {$in: team.members}}).fetch();
+    var members = Meteor.users.find({_id: {$in: team.members}},
+        {sort: {username: 1}}).fetch();
+    return members;
   }
 };
 

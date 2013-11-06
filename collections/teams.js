@@ -1,5 +1,10 @@
 /*global Meteor:true, Teams:true*/
 
+/* structure:
+ * {
+ * }
+ */
+
 Teams = new Meteor.Collection("teams");
 
 Teams.allow({
@@ -30,7 +35,7 @@ Teams.allow({
 Teams.before.insert(function(userId, team) {
   team.createdAt = Date.now();
   team.owner = userId;
-  team.members = [];
+  team.members = [userId];
   team.invitationsUsed = [];
   team.goals = [];
 });

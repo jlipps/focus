@@ -4,16 +4,16 @@ Invitations = new Meteor.Collection("invitations");
 
 Invitations.allow({
   insert: function(userId, invitation) {
-    console.log("inserting");
     var ok = !!invitation.team;
     ok = ok && Teams.find({_id: invitation.team, owner: userId}).count() == 1;
-    console.log(invitation.email);
-    console.log(invitation.team);
     ok = ok && Invitations.find({
       email: invitation.email,
       team: invitation.team
     }).count() === 0;
     return ok;
+  },
+  update: function(userId, doc, fieldNames, modifier) {
+    return _.contains(fieldNames, 'used') && fieldNames.length === 1;
   },
   remove: function(userId, invitation) {
     return true;
@@ -25,6 +25,7 @@ if (Meteor.isServer) {
   Invitations.before.insert(function(userId, invitation) {
     invitation.createdAt = Date.now();
     invitation.sender = userId;
+    invitation.used = false;
   });
 
   Invitations.after.insert(function(userId, invitation) {

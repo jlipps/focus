@@ -12,7 +12,7 @@ Template.yourTeams.teams = function() {
 
 var events = {};
 
-events['click #createTeam'] = function() {
+events['click .createTeamBtn'] = function() {
   $('#modalCont').html(Meteor.render(function() {
     return Template.createTeam();
   }));
