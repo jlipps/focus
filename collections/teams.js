@@ -2,6 +2,12 @@
 
 /* structure:
  * {
+ *   createdAt
+ *   name
+ *   owner (user id)
+ *   members (list of user ids)
+ *   invitationsUsed (list of invitation ids)
+ *   goals (list of goal ids)
  * }
  */
 

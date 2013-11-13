@@ -28,7 +28,8 @@ var sendInvitations = function(invitations, cb) {
   }
 };
 
-inviteEvents['submit #inviteMembersForm'] = function (evt, tpt) {
+inviteEvents['submit #inviteMembersForm'] =
+inviteEvents['click #inviteMembersBtn'] = function (evt, tpt) {
   evt.preventDefault();
   var teamId = Session.get('teamId');
   var emails = $('#inviteEmails').val().trim();
@@ -63,8 +64,6 @@ inviteEvents['submit #inviteMembersForm'] = function (evt, tpt) {
   $(tpt.find('.modal')).modal('hide');
   return false;
 };
-
-inviteEvents['click #inviteBtn'] = inviteEvents['submit #inviteMembersForm'];
 
 Template.inviteMembers.events(inviteEvents);
 

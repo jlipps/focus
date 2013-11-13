@@ -1,5 +1,14 @@
 /*global Meteor:true, Goals:true, Teams:true */
 
+/* structure:
+ * {
+ *   createdAt
+ *   goal
+ *   team (team id)
+ *   color (hex string)
+ * }
+ */
+
 Goals = new Meteor.Collection("goals");
 
 var allowTeamOwner = function(userId, goal) {
@@ -13,8 +22,13 @@ Goals.allow({
   remove: allowTeamOwner
 });
 
+var getRandomColor = function() {
+  return 'f0f0f0';
+};
+
 Goals.before.insert(function(userId, goal) {
   goal.createdAt = Date.now();
+  goal.color = getRandomColor();
 });
 
 

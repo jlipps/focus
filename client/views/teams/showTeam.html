@@ -21,7 +21,8 @@
         Goals
         <input type="button" value="Add" id="addGoal" />
       </h2>
-      {{#each team.goals}}
+      {{#each goals}}
+        <div class="team-goal">{{goal}}</div>
       {{else}}
         <p>No goals yet. Add some!</p>
       {{/each}}

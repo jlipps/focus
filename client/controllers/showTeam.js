@@ -1,5 +1,5 @@
-/*global Template:true, Meteor:true, Teams:true, $:true, Helpers:true,
-  Session:true, Invitations:true */
+/*global Template:true, Meteor:true, Teams:true, $:true,
+  Session:true, Goals:true */
 "use strict";
 
 Template.showTeam.team = function() {
@@ -16,11 +16,26 @@ Template.showTeam.members = function() {
   }
 };
 
+Template.showTeam.goals = function() {
+  var team = Template.showTeam.team();
+  if (team) {
+    var goals = Goals.find({_id: {$in: team.goals}},
+        {sort: {createdAt: -1}}).fetch();
+    return goals;
+  }
+};
+
 var events = {};
 
 events['click #inviteMembers'] = function() {
   $('#modalCont').html(Meteor.render(function() {
     return Template.inviteMembers();
+  }));
+};
+
+events['click #addGoal'] = function() {
+  $('#modalCont').html(Meteor.render(function() {
+    return Template.addGoal();
   }));
 };
 
