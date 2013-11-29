@@ -1,4 +1,4 @@
-/*global Meteor:true, Teams:true*/
+/*global Meteor:true, Teams:true, _:true */
 
 /* structure:
  * {
@@ -23,12 +23,18 @@ Teams.allow({
                        modifier['$push'].members &&
                        modifier['$push'].invitationsUsed &&
                        fieldNames.length === 2;
+    var addingGoal = modifier['$push'] &&
+                     modifier['$push'].goals &&
+                     fieldNames.length === 1;
     if (addingMember) {
       console.log("adding a member");
       var invitationId = modifier['$push'].invitationsUsed;
       var invitation = Invitations.findOne({_id: invitationId});
       console.log(invitation);
       return invitation && invitation.team === team._id;
+    } else if (addingGoal) {
+      // this is redundant for now, placeholder for 'admin' users for a team
+      return team.owner === userId;
     }
     return false;
 
@@ -38,12 +44,14 @@ Teams.allow({
   }
 });
 
-Teams.before.insert(function(userId, team) {
-  team.createdAt = Date.now();
-  team.owner = userId;
-  team.members = [userId];
-  team.invitationsUsed = [];
-  team.goals = [];
-});
+if (Meteor.isServer) {
 
+  Teams.before.insert(function(userId, team) {
+    team.createdAt = Date.now();
+    team.owner = userId;
+    team.members = [userId];
+    team.invitationsUsed = [];
+    team.goals = [];
+  });
 
+}

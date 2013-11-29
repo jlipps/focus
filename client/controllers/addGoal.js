@@ -1,10 +1,10 @@
-/*global Template:true, $:true, Helpers:true, Session:true, Goals:true */
+/*global Template:true, $:true, Helpers:true, Session:true, Teams:true,
+  Meteor:true */
 "use strict";
 
 var goalEvents = {};
-
-var addGoal = function(goal, cb) {
-  Goals.insert({goal: goalText, team: teamId}, function(err) {
+var getRandomColor = function() {
+  return 'f0f0f0';
 };
 
 goalEvents['submit #addGoalForm'] = goalEvents['click #addGoalBtn'] =
@@ -17,11 +17,10 @@ function (evt, tpt) {
     $('#goalErrors').show();
     return;
   }
-
-  Goals.insert({goal: goalText, team: teamId}, function(err) {
+  var goal = {goal: goalText, user: Meteor.userId(), color: getRandomColor()};
+  Teams.update(teamId, {$push: {goals: goal}}, function(err) {
     if (err) {
-      console.log(err);
-      Helpers.showError("Sorry, we ran into problems creating this goal", 4000);
+      Helpers.showError("Sorry, could not add that goal", 4000);
     } else {
       Helpers.showSuccess("Goal added!", 3000);
     }

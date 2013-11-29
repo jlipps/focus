@@ -19,9 +19,7 @@ Template.showTeam.members = function() {
 Template.showTeam.goals = function() {
   var team = Template.showTeam.team();
   if (team) {
-    var goals = Goals.find({_id: {$in: team.goals}},
-        {sort: {createdAt: -1}}).fetch();
-    return goals;
+    return team.goals;
   }
 };
 

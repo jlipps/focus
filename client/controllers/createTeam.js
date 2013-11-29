@@ -6,13 +6,13 @@ var submitCreation = function (evt, tpt) {
     name: $('#createTeamField').val()
   };
   Teams.insert(team, function(err) {
-    $(tpt.find('.modal')).modal('hide');
     if (err) {
       Helpers.showError("Sorry, could not add that team", 4000);
     } else {
       Helpers.showSuccess("Team added!", 3000);
     }
   });
+  $(tpt.find('.modal')).modal('hide');
 };
 
 Template.createTeam.events({
